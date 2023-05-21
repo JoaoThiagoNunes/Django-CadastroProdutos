@@ -1,0 +1,55 @@
+from django.shortcuts import render, redirect
+from .forms import ContatoForm, ProdutoModelForm
+from django.contrib import messages
+from .models import Produto
+
+
+def index(request):
+    return render(request, 'index.html')
+
+
+def contato_view(request):
+    form = ContatoForm(request.POST or None)
+
+    if str(request.method) == 'POST':
+        if form.is_valid():
+            form.send_mail()
+            messages.success(request, 'E-mail eniado com sucesso!')
+            form = ContatoForm
+        else:
+            messages.error(request, 'Erro ao enviar e-mail!')
+    context = {
+        'form': form
+    }
+    return render(request, 'contato.html', context)
+
+
+def produto_view(request):
+    if str(request.user) != 'AnonymousUser':
+        if str(request.method) == 'POST': #quando o usuario mandar os dados entrara aqui 
+            form = ProdutoModelForm(request.POST, request.FILES) #recupera os dados enviados pelo usuário
+            if form.is_valid(): #verifica se o form foi preenchido corretamente
+                
+                form.save() 
+                messages.success(request, 'Produto salvo com sucesso!')
+                form = ProdutoModelForm() #limpa o form após ser enviado
+            else:
+                messages.error(request, 'Erro ao salvar produto!')
+
+        else:
+            form = ProdutoModelForm() # instancia um Model e coloca no contexto para ser mostrado no html para o usuario preencher
+        context = {
+            'form': form
+        }
+        return render(request, 'produto.html', context)
+    
+    else:
+        return redirect('index')
+
+def listProdutos(request):
+    context = {
+        'produtos': Produto.objects.all()
+    }       
+    return render(request, 'listprodutos.html', context)
+
+    

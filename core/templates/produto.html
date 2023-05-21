@@ -1,0 +1,55 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto</title>
+    <style>
+      body {
+        background: url('../static/images/dark-background-abstract-background-network-3d-background-1920x1080-8324.png') 
+      }
+    </style>
+    {% bootstrap_css %}
+</head>
+<body>
+  <div class="container-fluid ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">    
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'listagem' %}">Listagem de Produtos</a>
+            </li>    
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'produto' %}">Cadastro de Produtos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{%url 'contato' %}">Contato</a>
+            </li>
+        </ul>
+        </div>
+        <a class="navbar-brand nav-link text-white ml-auto" href="https://github.com/JoaoThiagoNunes">GitHub</a>
+    </nav>
+  <br><br>  
+  </div>
+    <div class="container">
+        <h1 class="text-white">Produto</h1>
+        {% bootstrap_messages %}<!-- envio das mensagens configuradas em views-->  <!--enctype permite upload de arquivos -->          
+        <form action="{% url 'produto' %}" method="post" class="form text-white" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form form%} <!--aplicar o padrão do bootstrap no form-->
+            {% buttons %}<!-- o django cria um botão com as caracteristicas passadas no button html-->
+                <button type="submit" class="btn btn-primary">Cadastrar</button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% bootstrap_javascript jquery='full' %}    
+</body>
+</html>

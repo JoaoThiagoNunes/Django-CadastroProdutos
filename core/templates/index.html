@@ -1,0 +1,63 @@
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        body {
+            background-image: url('static/images/dark-background-abstract-background-network-3d-background-1920x1080-8324.png');
+        }
+        .my-form {
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container-fluid ">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>           
+            <a class="navbar-brand nav-link text-white ml-auto" href="https://github.com/JoaoThiagoNunes">GitHub</a>                   
+        </nav>
+    </div>
+    <br><br><br>
+    <div class="container">
+        <div class="card-deck">
+            <div class="card" style="width: 22rem;">
+                <img class="card-img-top" src="../static/images/listagem-image.png" alt="Imagem de capa do card">
+                <div class="card-body">
+                    <h5 class="card-title">Listagem de produtos</h5>
+                    <p class="card-text">Aqui você pode acessar os produtos cadastrados no banco de dados.</p>
+                    <a href="{%url 'listagem' %}" class="btn btn-primary">Visitar</a>
+                </div>
+            </div>
+    
+            <div class="card" style="width: 22rem;">
+                <img class="card-img-top" src="../static/images/cadastro-image.png" alt="Imagem de capa do card">
+                <div class="card-body">
+                    <h5 class="card-title">Cadastro de produto</h5>
+                    <p class="card-text">Se quiser cadastrar algum produto novo esse é o lugar correto.</p>
+                    <a href="{% url 'produto' %}" class="btn btn-primary">Visitar</a>
+                </div>
+            </div>
+    
+            <div class="card" style="width: 22rem;">
+                <img class="card-img-top" src="../static/images/contato-image.png/" alt="Imagem de capa do card">
+                <div class="card-body">
+                    <h5 class="card-title">Contato</h5>
+                    <p class="card-text">Aperte aqui caso queira nos contatar.</p>
+                    <a href="{%url 'contato'%}" class="btn btn-primary">Visitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% bootstrap_javascript jquery='full'%}
+</body>
+</html>
